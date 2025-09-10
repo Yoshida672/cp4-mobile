@@ -10,17 +10,14 @@ export default function Login(){
     const handleLogin=()=>{
     if(!email || !senha ){
         Alert.alert("Atenção!","Preencha todos os campos!");
+        return
     }
-    else{
     signInWithEmailAndPassword(auth,email,senha).then(
-        async(userCredential)=>{
-            const user = userCredential.user
+        async()=>{
             router.push("/HomeScreen")
 
         }
     )
-   
-}
 }
 
     return(
@@ -40,7 +37,9 @@ export default function Login(){
      <TouchableOpacity onPress={handleLogin}>
         <Text>Login</Text>
      </TouchableOpacity>
-
+<TouchableOpacity onPress={()=>router.push("/Register")}>
+        <Text>Cadastre-se</Text>
+     </TouchableOpacity>
     </View>
     );
 }
