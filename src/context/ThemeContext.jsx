@@ -1,4 +1,4 @@
-import React,{createContext,useContext,useEffect,useState} from "react";
+import React,{createContext,useContext,useState} from "react";
 import { Appearance } from "react-native";
 
 const ThemeContext = createContext(ThemeContext)
@@ -6,7 +6,7 @@ const ThemeContext = createContext(ThemeContext)
 export function useTheme(){
     return useContext(ThemeContext)
 }
-export default function ThemeProvider({children}){
+export function ThemeProvider({children}){
 
     const colorScheme = Appearance.getColorScheme()
     const [theme,setTheme] = useState(colorScheme||"light")
@@ -26,9 +26,9 @@ export default function ThemeProvider({children}){
         }
     }
     return(
-        <ThemeContext>
+   <ThemeContext.Provider value={{toggleTheme,colors:themeColors[theme],theme:theme}}>
             {children}
-        </ThemeContext>
+        </ThemeContext.Provider>
     )
 
 }
