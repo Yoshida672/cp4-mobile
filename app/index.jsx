@@ -37,6 +37,7 @@ export default function Login(){
      <TouchableOpacity onPress={handleLogin}>
         <Text>Login</Text>
      </TouchableOpacity>
+
 <TouchableOpacity onPress={()=>router.push("/Register")}>
         <Text>Cadastre-se</Text>
      </TouchableOpacity>
