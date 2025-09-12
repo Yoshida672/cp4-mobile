@@ -40,7 +40,7 @@ export default function Login(){
      <TouchableOpacity onPress={handleLogin}>
         <Text>Login</Text>
      </TouchableOpacity>
-
+        
     </View>
     );
 }

@@ -1,5 +1,5 @@
 import React from "react";
-import { View ,Text, FlatList} from "react-native";
+import { View ,Text, FlatList, Image} from "react-native";
 import { useQuery } from "@tanstack/react-query";
 import { fetchCharacter } from "../src/api/marvelApi";
 
@@ -23,7 +23,7 @@ return(
         <Text>Personagens</Text>
         <FlatList
             data={data}
-            keyExtractor={(item) => item.data.results.id}
+            keyExtractor={(item) => item.id}
             renderItem={({ item }) => (
         <View>
             <Image
@@ -33,7 +33,7 @@ return(
               style={{width:100,height:100}}
             />
 
-            <Text style={{fontSize:40}}>{item.data.results.name}</Text>
+            <Text style={{fontSize:20}}>{item.name}</Text>
             
           </View>
         )}

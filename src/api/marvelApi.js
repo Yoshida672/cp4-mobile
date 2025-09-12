@@ -9,11 +9,12 @@ export async function fetchCharacter() {
   const hash = md5(ts + privateKey + publicKey).toString();
 
   const url = `https://gateway.marvel.com/v1/public/characters?ts=${ts}&apikey=${publicKey}&hash=${hash}`;
-
+try{
   const res = await axios.get(url);
-  if (!res.ok) {
+  return res.data.data.results;
+}catch(error)
+{
+   console.error("Erro ao buscar personagens da Marvel:", error);
     throw new Error("Erro ao buscar personagens da Marvel");
-  }
-
-  return res.data.json();
+}
 }
