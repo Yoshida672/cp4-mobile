@@ -28,6 +28,7 @@
   "home": {
     "characters": "Characters",
     "loading": "Loading...",
-    "error": "Error loading characters"
+    "error": "Error loading characters",
+    "logout": "Log out"
   }
 }

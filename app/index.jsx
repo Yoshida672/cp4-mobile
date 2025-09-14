@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   Alert,
   Text,
@@ -13,6 +13,7 @@ import { useRouter } from "expo-router";
 import ThemeToggleButton from "../src/components/ThemeToggleButton";
 import { useTheme } from "../src/context/ThemeContext";
 import { useTranslation } from "react-i18next";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export default function Login() {
   const { colors } = useTheme();
@@ -30,10 +31,37 @@ export default function Login() {
       Alert.alert(t("login.alerts.title"), t("login.alerts.message"));
       return;
     }
-    signInWithEmailAndPassword(auth, email, senha).then(async () => {
-      router.push("/HomeScreen");
-    });
+    signInWithEmailAndPassword(auth, email, senha)
+      .then(async (userCredential) => {
+        const user = userCredential.user;
+        await AsyncStorage.setItem("@user", JSON.stringify(user));
+        router.push("/HomeScreen");
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        console.log(errorCode);
+        console.log(errorMessage);
+        if (error.code === "auth/network-request-failed") {
+          Alert.alert("Error", "Verifique sua conexão");
+        }
+        if (error.code === "auth/invalid-credential") {
+          Alert.alert("Atenção", "Verifique as credenciais");
+        }
+      });
   };
+
+  useEffect(() => {
+    const checkUser = async () => {
+      const user = await AsyncStorage.getItem("@user");
+      if (user) {
+        router.push("/HomeScreen");
+      } else {
+        console.log("Error ao verificar login", error);
+      }
+    };
+    checkUser();
+  }, []);
 
   return (
     <View style={{ ...styles.container, backgroundColor: colors.background }}>

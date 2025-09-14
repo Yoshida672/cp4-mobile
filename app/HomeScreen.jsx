@@ -1,11 +1,19 @@
 import React from "react";
-import { View, Text, FlatList, Image, StyleSheet } from "react-native";
+import {
+  View,
+  Text,
+  FlatList,
+  Image,
+  StyleSheet,
+  TouchableOpacity,
+} from "react-native";
 import { useQuery } from "@tanstack/react-query";
 import { fetchCharacter } from "../src/api/marvelApi";
 import { useTheme } from "../src/context/ThemeContext";
 import ThemeToggleButton from "../src/components/ThemeToggleButton";
 import { useTranslation } from "react-i18next";
-
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { useRouter } from "expo-router";
 export default function HomeScreen() {
   const { data, isLoading, error } = useQuery({
     queryKey: ["marvel-characters"],
@@ -13,6 +21,17 @@ export default function HomeScreen() {
   });
   const { colors } = useTheme();
   const { t } = useTranslation();
+  const router = useRouter();
+  const logout = async () => {
+    console.log("Logout");
+    console.log(await AsyncStorage.getItem("@user"));
+    await AsyncStorage.removeItem("@user").then(() =>
+      console.log("User removed")
+    );
+    console.log(await AsyncStorage.getItem("@user"));
+    router.replace("/");
+  };
+
   if (isLoading) {
     return (
       <View style={{ ...styles.center, backgroundColor: colors.background }}>
@@ -36,6 +55,9 @@ export default function HomeScreen() {
   return (
     <View style={{ ...styles.container, backgroundColor: colors.background }}>
       <ThemeToggleButton />
+      <TouchableOpacity style={styles.button} onPress={logout}>
+        <Text style={styles.buttonText}>{t("home.logout")}</Text>
+      </TouchableOpacity>
       <Text style={{ ...styles.title, color: colors.text }}>
         {t("home.characters")}
       </Text>

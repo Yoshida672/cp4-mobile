@@ -28,6 +28,7 @@
   "home": {
     "characters": "Personagens",
     "loading": "Carregando...",
-    "error": "Erro ao carregar personagens"
+    "error": "Erro ao carregar personagens",
+    "logoff": "Sair"
   }
 }
