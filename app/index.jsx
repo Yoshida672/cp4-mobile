@@ -12,16 +12,22 @@ import { signInWithEmailAndPassword } from "firebase/auth";
 import { useRouter } from "expo-router";
 import ThemeToggleButton from "../src/components/ThemeToggleButton";
 import { useTheme } from "../src/context/ThemeContext";
+import { useTranslation } from "react-i18next";
 
 export default function Login() {
   const { colors } = useTheme();
   const [email, setEmail] = useState("");
   const [senha, setSenha] = useState("");
   const router = useRouter();
+  const { t, i18n } = useTranslation();
 
+  //Função para mudar o idioma
+  const mudarIdioma = (lang) => {
+    i18n.changeLanguage(lang);
+  };
   const handleLogin = () => {
     if (!email || !senha) {
-      Alert.alert("Atenção!", "Preencha todos os campos!");
+      Alert.alert(t("login.alerts.title"), t("login.alerts.message"));
       return;
     }
     signInWithEmailAndPassword(auth, email, senha).then(async () => {
@@ -30,16 +36,16 @@ export default function Login() {
   };
 
   return (
-    <View
-      style={{ ...styles.container, backgroundColor: colors.background }}
-    >
+    <View style={{ ...styles.container, backgroundColor: colors.background }}>
       <ThemeToggleButton />
 
-      <Text style={{ ...styles.title, color: colors.text }}>Login</Text>
+      <Text style={{ ...styles.title, color: colors.text }}>
+        {t("login.title")}
+      </Text>
 
       <TextInput
         style={styles.input}
-        placeholder="Email"
+        placeholder={t("login.email")}
         value={email}
         onChangeText={setEmail}
         autoCapitalize="none"
@@ -48,21 +54,41 @@ export default function Login() {
 
       <TextInput
         style={styles.input}
-        placeholder="Senha"
+        placeholder={t("login.password")}
         value={senha}
         onChangeText={setSenha}
         secureTextEntry
       />
 
+      <View style={styles.languageContainer}>
+        <TouchableOpacity
+          style={[styles.languageButton, { backgroundColor: "#007bff" }]}
+          onPress={() => mudarIdioma("pt")}
+        >
+          <Text style={styles.buttonText}>PT</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity
+          style={[styles.languageButton, { backgroundColor: "#328132" }]}
+          onPress={() => mudarIdioma("en")}
+        >
+          <Text style={styles.buttonText}>EN</Text>
+        </TouchableOpacity>
+      </View>
+
       <TouchableOpacity style={styles.button} onPress={handleLogin}>
-        <Text style={styles.buttonText}>Entrar</Text>
+        <Text style={styles.buttonText}>{t("login.buttonLogin")}</Text>
+      </TouchableOpacity>
+
+      <TouchableOpacity style={styles.button} onPress={() => {}}>
+        <Text style={styles.buttonText}>Google</Text>
       </TouchableOpacity>
 
       <TouchableOpacity
         style={styles.linkContainer}
         onPress={() => router.push("/Register")}
       >
-        <Text style={styles.linkText}>Cadastre-se</Text>
+        <Text style={styles.linkText}>{t("login.register")}</Text>
       </TouchableOpacity>
     </View>
   );
@@ -109,5 +135,28 @@ const styles = StyleSheet.create({
   linkText: {
     color: "#007BFF",
     fontSize: 16,
+  },
+  languageContainer: {
+    flexDirection: "row",
+    justifyContent: "center",
+    marginBottom: 20,
+    gap: 12,
+  },
+  languageButton: {
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+    borderRadius: 8,
+    alignItems: "center",
+    justifyContent: "center",
+    shadowColor: "#000",
+    shadowOpacity: 0.2,
+    shadowOffset: { width: 0, height: 2 },
+    shadowRadius: 3,
+    elevation: 3,
+  },
+  buttonText: {
+    color: "#fff",
+    fontSize: 16,
+    fontWeight: "bold",
   },
 });

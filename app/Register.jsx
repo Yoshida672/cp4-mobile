@@ -12,16 +12,18 @@ import {
 import { router } from "expo-router";
 import ThemeToggleButton from "../src/components/ThemeToggleButton";
 import { useTheme } from "../src/context/ThemeContext";
+import { useTranslation } from "react-i18next";
 
 export default function Register() {
   const { colors } = useTheme();
   const [nome, setNome] = useState("");
   const [email, setEmail] = useState("");
   const [senha, setSenha] = useState("");
+  const { t } = useTranslation();
 
   const handleRegister = () => {
     if (!nome || !email || !senha) {
-      Alert.alert("Atenção", "Preencha todos os campos");
+      Alert.alert(t("login.alerts.title"), t("login.alerts.message"));
       return;
     }
     createUserWithEmailAndPassword(auth, email, senha)
@@ -29,24 +31,24 @@ export default function Register() {
         router.back();
       })
       .catch((error) => {
-        Alert.alert("Erro", error.message);
+        Alert.alert(t("login.alerts.error"), error.message);
       });
   };
 
   return (
     <View style={{ ...styles.container, backgroundColor: colors.background }}>
       <ThemeToggleButton />
-      <Text style={{ ...styles.title, color: colors.text }}>Cadastre-se</Text>
+      <Text style={{ ...styles.title, color: colors.text }}>{t("register.title")}</Text>
       <TextInput
         style={styles.input}
-        placeholder="Nome"
+        placeholder={t("register.name")}
         value={nome}
         onChangeText={setNome}
       />
 
       <TextInput
         style={styles.input}
-        placeholder="Email"
+        placeholder={t("register.email")}
         value={email}
         onChangeText={setEmail}
         autoCapitalize="none"
@@ -55,21 +57,21 @@ export default function Register() {
 
       <TextInput
         style={styles.input}
-        placeholder="Senha"
+        placeholder={t("register.password")}
         value={senha}
         onChangeText={setSenha}
         secureTextEntry
       />
 
       <TouchableOpacity style={styles.button} onPress={handleRegister}>
-        <Text style={styles.buttonText}>Cadastrar</Text>
+        <Text style={styles.buttonText}>{t("register.buttonRegister")}</Text>
       </TouchableOpacity>
 
       <TouchableOpacity
         style={styles.linkContainer}
         onPress={() => router.back()}
       >
-        <Text style={styles.linkText}>Voltar para Login</Text>
+        <Text style={styles.linkText}>{t("register.backToLogin")}</Text>
       </TouchableOpacity>
     </View>
   );

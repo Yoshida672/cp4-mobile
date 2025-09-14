@@ -1,0 +1,33 @@
+{
+  "register": {
+    "title": "Register",
+    "name": "Name",
+    "email": "Email",
+    "password": "Password",
+    "buttonRegister": "Register",
+    "backToLogin": "Back to Login",
+    "alerts": {
+      "title": "Attention",
+      "message": "Fill in all fields",
+      "error": "Error"
+    }
+  },
+  "login": {
+    "title": "Login",
+    "email": "Email",
+    "password": "Password",
+    "buttonLogin": "Login",
+    "noAccount": "Don't have an account? ",
+    "register": "Register",
+    "alerts": {
+      "title": "Attention",
+      "message": "Fill in all fields",
+      "error": "Error"
+    }
+  },
+  "home": {
+    "characters": "Characters",
+    "loading": "Loading...",
+    "error": "Error loading characters"
+  }
+}

@@ -2,32 +2,43 @@ import React from "react";
 import { View, Text, FlatList, Image, StyleSheet } from "react-native";
 import { useQuery } from "@tanstack/react-query";
 import { fetchCharacter } from "../src/api/marvelApi";
+import { useTheme } from "../src/context/ThemeContext";
+import ThemeToggleButton from "../src/components/ThemeToggleButton";
+import { useTranslation } from "react-i18next";
 
 export default function HomeScreen() {
   const { data, isLoading, error } = useQuery({
     queryKey: ["marvel-characters"],
     queryFn: fetchCharacter,
   });
-
+  const { colors } = useTheme();
+  const { t } = useTranslation();
   if (isLoading) {
     return (
-      <View style={styles.center}>
-        <Text style={styles.loading}>Carregando...</Text>
+      <View style={{ ...styles.center, backgroundColor: colors.background }}>
+        <Text style={{ ...styles.loading, color: colors.text }}>
+          {t("home.loading")}
+        </Text>
       </View>
     );
   }
 
   if (error) {
     return (
-      <View style={styles.center}>
-        <Text style={styles.error}>Erro ao carregar personagens</Text>
+      <View style={{ ...styles.center, backgroundColor: colors.background }}>
+        <Text style={{ ...styles.error, color: colors.text }}>
+          {t("home.error")}
+        </Text>
       </View>
     );
   }
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Personagens</Text>
+    <View style={{ ...styles.container, backgroundColor: colors.background }}>
+      <ThemeToggleButton />
+      <Text style={{ ...styles.title, color: colors.text }}>
+        {t("home.characters")}
+      </Text>
       <FlatList
         data={data}
         keyExtractor={(item) => item.id.toString()}

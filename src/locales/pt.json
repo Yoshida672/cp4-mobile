@@ -1,0 +1,33 @@
+{
+  "register": {
+    "title": "Cadastre-se",
+    "name": "Nome",
+    "email": "Email",
+    "password": "Senha",
+    "buttonRegister": "Cadastrar",
+    "backToLogin": "Voltar para Login",
+    "alerts": {
+      "title": "Atenção",
+      "message": "Preencha todos os campos",
+      "error": "Erro"
+    }
+  },
+  "login": {
+    "title": "Login",
+    "email": "Email",
+    "password": "Senha",
+    "buttonLogin": "Entrar",
+    "noAccount": "Não tem uma conta? ",
+    "register": "Cadastre-se",
+    "alerts": {
+      "title": "Atenção",
+      "message": "Preencha todos os campos",
+      "error": "Erro"
+    }
+  },
+  "home": {
+    "characters": "Personagens",
+    "loading": "Carregando...",
+    "error": "Erro ao carregar personagens"
+  }
+}
