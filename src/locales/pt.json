@@ -9,7 +9,14 @@
     "alerts": {
       "title": "Atenção",
       "message": "Preencha todos os campos",
-      "error": "Erro"
+      "error": {
+        "title": "Erro",
+        "invalidEmail": "Email inválido",
+        "invalidPassword": "Senha inválida",
+        "emailInUse": "Email já em uso",
+        "weakPassword": "Senha fraca",
+        "generic": "Ocorreu um erro"
+      }
     }
   },
   "login": {

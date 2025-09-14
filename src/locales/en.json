@@ -9,7 +9,14 @@
     "alerts": {
       "title": "Attention",
       "message": "Fill in all fields",
-      "error": "Error"
+      "error": {
+        "title": "Error",
+        "invalidEmail": "Invalid Email",
+        "invalidPassword": "Invalid Password",
+        "emailInUse": "Email already in use",
+        "weakPassword": "Weak Password",
+        "generic": "An error occurred"
+      }
     }
   },
   "login": {
