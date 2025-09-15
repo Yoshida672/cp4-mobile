@@ -36,6 +36,7 @@
     "characters": "Characters",
     "loading": "Loading...",
     "error": "Error loading characters",
-    "logout": "Log out"
+    "logout": "Log out",
+    "deleteAccount": "Delete Account"
   }
 }

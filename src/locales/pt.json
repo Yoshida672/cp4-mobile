@@ -36,6 +36,7 @@
     "characters": "Personagens",
     "loading": "Carregando...",
     "error": "Erro ao carregar personagens",
-    "logoff": "Sair"
+    "logoff": "Sair",
+    "deleteAccount": "Deletar Conta"
   }
 }

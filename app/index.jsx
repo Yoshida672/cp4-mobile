@@ -22,7 +22,6 @@ export default function Login() {
   const router = useRouter();
   const { t, i18n } = useTranslation();
 
-  //Função para mudar o idioma
   const mudarIdioma = (lang) => {
     i18n.changeLanguage(lang);
   };
@@ -106,10 +105,6 @@ export default function Login() {
 
       <TouchableOpacity style={styles.button} onPress={handleLogin}>
         <Text style={styles.buttonText}>{t("login.buttonLogin")}</Text>
-      </TouchableOpacity>
-
-      <TouchableOpacity style={styles.button} onPress={() => {}}>
-        <Text style={styles.buttonText}>Google</Text>
       </TouchableOpacity>
 
       <TouchableOpacity
